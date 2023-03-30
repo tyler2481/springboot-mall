@@ -5,6 +5,7 @@ import com.tyler.springbootmail.dto.ProductQueryParams;
 import com.tyler.springbootmail.dto.ProductRequest;
 import com.tyler.springbootmail.model.Product;
 import com.tyler.springbootmail.service.ProductService;
+import com.tyler.springbootmail.util.Page;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -22,7 +23,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(
+    public ResponseEntity<Page<Product>> getProducts(
             //查詢條件
            @RequestParam (required = false) ProductCategory category,
            @RequestParam (required = false) String search,
@@ -40,8 +41,19 @@ public class ProductController {
         productQueryParams.setSort(sort);
         productQueryParams.setLimit(limit);
         productQueryParams.setOffset(offset);
-       List<Product> productList = productService.getProducts(productQueryParams);
-       return ResponseEntity.status(HttpStatus.OK).body(productList);
+
+        //取得productList
+        List<Product> productList = productService.getProducts(productQueryParams);
+        //取得product總筆數
+        Integer total = productService.countProduct(productQueryParams);
+        //分頁
+        Page<Product> page = new Page<>();
+        page.setLimit(limit);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResult(productList);
+
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
     @GetMapping("/products/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId){
