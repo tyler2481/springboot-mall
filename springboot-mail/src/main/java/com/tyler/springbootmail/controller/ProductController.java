@@ -1,6 +1,7 @@
 package com.tyler.springbootmail.controller;
 
 import com.tyler.springbootmail.constant.ProductCategory;
+import com.tyler.springbootmail.dto.ProductQueryParams;
 import com.tyler.springbootmail.dto.ProductRequest;
 import com.tyler.springbootmail.model.Product;
 import com.tyler.springbootmail.service.ProductService;
@@ -22,7 +23,10 @@ public class ProductController {
            @RequestParam (required = false) ProductCategory category,
            @RequestParam (required = false) String search
     ){
-       List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+       List<Product> productList = productService.getProducts(productQueryParams);
        return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
     @GetMapping("/products/{productId}")

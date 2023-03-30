@@ -1,7 +1,7 @@
 package com.tyler.springbootmail.service.impl;
 
-import com.tyler.springbootmail.constant.ProductCategory;
 import com.tyler.springbootmail.dao.ProductDao;
+import com.tyler.springbootmail.dto.ProductQueryParams;
 import com.tyler.springbootmail.dto.ProductRequest;
 import com.tyler.springbootmail.model.Product;
 import com.tyler.springbootmail.service.ProductService;
@@ -16,8 +16,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return productDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override
