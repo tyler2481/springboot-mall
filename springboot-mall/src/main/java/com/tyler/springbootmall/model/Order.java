@@ -7,6 +7,8 @@ public class Order {
     private Integer orderId;
     private Integer userId;
     private Integer totalAmount;
+    private Date createdDate;
+    private Date lastModifiedDate;
     private List<OrderItem> orderItemList;
 
     public List<OrderItem> getOrderItemList() {
@@ -56,8 +58,5 @@ public class Order {
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
-
-    private Date createdDate;
-    private Date lastModifiedDate;
 
 }

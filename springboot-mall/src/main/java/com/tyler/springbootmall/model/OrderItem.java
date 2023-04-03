@@ -7,6 +7,7 @@ public class OrderItem {
     private Integer quantity;
     private String productName;
     private String imageUrl;
+    private Integer amount;
 
     public String getProductName() {
         return productName;
@@ -63,6 +64,4 @@ public class OrderItem {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
-
-    private Integer amount;
 }

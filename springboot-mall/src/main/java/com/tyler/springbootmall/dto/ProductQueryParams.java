@@ -5,8 +5,10 @@ import com.tyler.springbootmall.constant.ProductCategory;
 public class ProductQueryParams {
     private ProductCategory category;
     private String search;
-
     private Integer limit;
+    private Integer offset;
+    private String orderBy;
+    private String sort;
 
     public Integer getLimit() {
         return limit;
@@ -24,8 +26,6 @@ public class ProductQueryParams {
         this.offset = offset;
     }
 
-    private Integer offset;
-
     public String getOrderBy() {
         return orderBy;
     }
@@ -41,10 +41,6 @@ public class ProductQueryParams {
     public void setSort(String sort) {
         this.sort = sort;
     }
-
-    private String orderBy;
-
-    private String sort;
 
     public ProductCategory getCategory() {
         return category;
